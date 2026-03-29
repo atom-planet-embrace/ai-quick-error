@@ -10,6 +10,3 @@ homepage = "http://github.com/atom-planet-embrace/quick-error"
 repository = "http://github.com/atom-planet-embrace/quick-error"
 documentation = "http://docs.rs/ai-quick-error"
 categories = ["rust-patterns"]
-
-[features]
-std = []
