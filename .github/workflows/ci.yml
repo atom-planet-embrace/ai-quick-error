@@ -23,3 +23,10 @@ jobs:
           targets: thumbv7m-none-eabi
       - run: cargo build --target thumbv7m-none-eabi
       - run: cargo check
+
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --examples
