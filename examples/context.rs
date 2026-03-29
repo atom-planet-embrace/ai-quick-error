@@ -1,11 +1,11 @@
-use quick_error::{quick_error, ResultExt};
+use ai_quick_error::{ai_quick_error, ResultExt};
 use std::env;
 use std::fs::File;
 use std::io::{self, stderr, Read, Write};
 use std::num::ParseIntError;
 use std::path::{Path, PathBuf};
 
-quick_error! {
+ai_quick_error! {
     #[derive(Debug)]
     pub enum Error {
         NoFileName {}

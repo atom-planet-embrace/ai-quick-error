@@ -5,10 +5,10 @@
 //! Minimum type is like this:
 //!
 //! ```rust
-//! #[macro_use] extern crate quick_error;
+//! #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //!
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         Variant1 {}
@@ -26,10 +26,10 @@
 //! You may add arbitrary parameters to any struct variant:
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         /// IO Error
@@ -51,10 +51,10 @@
 //! * No `From` implementations are defined
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         Io(err: std::io::Error) {
@@ -71,10 +71,10 @@
 //! example:
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         Io(err: std::io::Error) {
@@ -97,10 +97,10 @@
 //! for example:
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         Io(err: std::io::Error) {
@@ -117,12 +117,12 @@
 //! `display(x) -> (pattern, ..args)`, where `x` sets the name of the reference.
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
 //! use std::error::Error; // put methods like `source()` of this trait into scope
 //!
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         Io(err: std::io::Error) {
@@ -141,10 +141,10 @@
 //! For example, to convert simple wrapper use bare `from()`:
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         Io(err: std::io::Error) {
@@ -160,10 +160,10 @@
 //! the `from(type)` form:
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         FormatError {
@@ -178,10 +178,10 @@
 //! value conversions:
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //! #
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum SomeError {
 //!         FailedOperation(s: &'static str, errno: i32) {
@@ -198,19 +198,19 @@
 //! ```
 //! # Context
 //!
-//! Since quick-error 1.1 we also have a `context` declaration, which is
+//! Since ai-quick-error 1.1 we also have a `context` declaration, which is
 //! similar to (the longest form of) `from`, but allows adding some context to
 //! the error. We need a longer example to demonstrate this:
 //!
 //! ```rust
-//! # #[macro_use] extern crate quick_error;
+//! # #[macro_use] extern crate ai_quick_error;
 //! # use std::io;
 //! # use std::fs::File;
 //! # use std::path::{Path, PathBuf};
 //! #
-//! use quick_error::ResultExt;
+//! use ai_quick_error::ResultExt;
 //!
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum Error {
 //!         File(filename: PathBuf, err: io::Error) {
@@ -244,7 +244,7 @@
 //! AsRef<Type>`, and `Type` must be concrete). It's also occasionally useful
 //! to use a tuple as a type of the first argument.
 //!
-//! You also need to `use quick_error::ResultExt` extension trait to get
+//! You also need to `use ai_quick_error::ResultExt` extension trait to get
 //! working `.context()` method.
 //!
 //! More info on context in [this article](http://bit.ly/1PsuxDt).
@@ -252,19 +252,19 @@
 //! All forms of `from`, `display`, `source`, and `context`
 //! clauses can be combined and put in arbitrary order. Only `from` and
 //! `context` can be used multiple times in single variant of enumeration.
-//! Docstrings are also okay.  Empty braces can be omitted as of quick_error
+//! Docstrings are also okay.  Empty braces can be omitted as of ai_quick_error
 //! 0.1.3.
 //!
 //! # Private Enums
 //!
-//! Since quick-error 1.2.0 we  have a way to make a private enum that is
+//! Since ai-quick-error 1.2.0 we  have a way to make a private enum that is
 //! wrapped by public structure:
 //!
 //! ```rust
-//! #[macro_use] extern crate quick_error;
+//! #[macro_use] extern crate ai_quick_error;
 //! # fn main() {}
 //!
-//! quick_error! {
+//! ai_quick_error! {
 //!     #[derive(Debug)]
 //!     pub enum PubError wraps ErrorEnum {
 //!         Variant1 {}
@@ -296,19 +296,19 @@
 
 /// Main macro that does all the work
 #[macro_export]
-macro_rules! quick_error {
+macro_rules! ai_quick_error {
 
     (   $(#[$meta:meta])*
         pub enum $name:ident { $($chunks:tt)* }
     ) => {
-        quick_error!(SORT [pub enum $name $(#[$meta])* ]
+        ai_quick_error!(SORT [pub enum $name $(#[$meta])* ]
             items [] buf []
             queue [ $($chunks)* ]);
     };
     (   $(#[$meta:meta])*
         enum $name:ident { $($chunks:tt)* }
     ) => {
-        quick_error!(SORT [enum $name $(#[$meta])* ]
+        ai_quick_error!(SORT [enum $name $(#[$meta])* ]
             items [] buf []
             queue [ $($chunks)* ]);
     };
@@ -316,8 +316,8 @@ macro_rules! quick_error {
     (   $(#[$meta:meta])*
         pub enum $name:ident wraps $enum_name:ident { $($chunks:tt)* }
     ) => {
-        quick_error!(WRAPPER $enum_name [ pub struct ] $name $(#[$meta])*);
-        quick_error!(SORT [enum $enum_name $(#[$meta])* ]
+        ai_quick_error!(WRAPPER $enum_name [ pub struct ] $name $(#[$meta])*);
+        ai_quick_error!(SORT [enum $enum_name $(#[$meta])* ]
             items [] buf []
             queue [ $($chunks)* ]);
     };
@@ -325,16 +325,16 @@ macro_rules! quick_error {
     (   $(#[$meta:meta])*
         pub enum $name:ident wraps pub $enum_name:ident { $($chunks:tt)* }
     ) => {
-        quick_error!(WRAPPER $enum_name [ pub struct ] $name $(#[$meta])*);
-        quick_error!(SORT [pub enum $enum_name $(#[$meta])* ]
+        ai_quick_error!(WRAPPER $enum_name [ pub struct ] $name $(#[$meta])*);
+        ai_quick_error!(SORT [pub enum $enum_name $(#[$meta])* ]
             items [] buf []
             queue [ $($chunks)* ]);
     };
     (   $(#[$meta:meta])*
         enum $name:ident wraps $enum_name:ident { $($chunks:tt)* }
     ) => {
-        quick_error!(WRAPPER $enum_name [ struct ] $name $(#[$meta])*);
-        quick_error!(SORT [enum $enum_name $(#[$meta])* ]
+        ai_quick_error!(WRAPPER $enum_name [ struct ] $name $(#[$meta])*);
+        ai_quick_error!(SORT [enum $enum_name $(#[$meta])* ]
             items [] buf []
             queue [ $($chunks)* ]);
     };
@@ -342,8 +342,8 @@ macro_rules! quick_error {
     (   $(#[$meta:meta])*
         enum $name:ident wraps pub $enum_name:ident { $($chunks:tt)* }
     ) => {
-        quick_error!(WRAPPER $enum_name [ struct ] $name $(#[$meta])*);
-        quick_error!(SORT [pub enum $enum_name $(#[$meta])* ]
+        ai_quick_error!(WRAPPER $enum_name [ struct ] $name $(#[$meta])*);
+        ai_quick_error!(SORT [pub enum $enum_name $(#[$meta])* ]
             items [] buf []
             queue [ $($chunks)* ]);
     };
@@ -385,16 +385,16 @@ macro_rules! quick_error {
         buf [ ]
         queue [ ]
     ) => {
-        quick_error!(ENUM_DEFINITION [enum $name $( #[$meta] )*]
+        ai_quick_error!(ENUM_DEFINITION [enum $name $( #[$meta] )*]
             body []
             queue [$($( #[$imeta] )*
                       => $iitem: $imode [$( $ivar: $ityp ),*] )*]
         );
-        quick_error!(IMPLEMENTATIONS $name {$(
+        ai_quick_error!(IMPLEMENTATIONS $name {$(
            $iitem: $imode [$(#[$imeta])*] [$( $ivar: $ityp ),*] {$( $ifuncs )*}
            )*});
         $(
-            quick_error!(ERROR_CHECK $imode $($ifuncs)*);
+            ai_quick_error!(ERROR_CHECK $imode $($ifuncs)*);
         )*
     };
     (SORT [pub enum $name:ident $( #[$meta:meta] )*]
@@ -404,16 +404,16 @@ macro_rules! quick_error {
         buf [ ]
         queue [ ]
     ) => {
-        quick_error!(ENUM_DEFINITION [pub enum $name $( #[$meta] )*]
+        ai_quick_error!(ENUM_DEFINITION [pub enum $name $( #[$meta] )*]
             body []
             queue [$($( #[$imeta] )*
                       => $iitem: $imode [$( $ivar: $ityp ),*] )*]
         );
-        quick_error!(IMPLEMENTATIONS $name {$(
+        ai_quick_error!(IMPLEMENTATIONS $name {$(
            $iitem: $imode [$(#[$imeta])*] [$( $ivar: $ityp ),*] {$( $ifuncs )*}
            )*});
         $(
-            quick_error!(ERROR_CHECK $imode $($ifuncs)*);
+            ai_quick_error!(ERROR_CHECK $imode $($ifuncs)*);
         )*
     };
     // Add meta to buffer
@@ -424,7 +424,7 @@ macro_rules! quick_error {
         buf [$( #[$bmeta:meta] )*]
         queue [ #[$qmeta:meta] $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])* => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*]
             buf [$( #[$bmeta] )* #[$qmeta] ]
             queue [$( $tail )*]);
@@ -437,7 +437,7 @@ macro_rules! quick_error {
         buf [$( #[$bmeta:meta] )*]
         queue [ $qitem:ident $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])*
                       => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*]
             buf [$(#[$bmeta])* => $qitem : UNIT [ ] ]
@@ -452,7 +452,7 @@ macro_rules! quick_error {
             => $bitem:ident: $bmode:tt [$( $bvar:ident: $btyp:ty ),*] ]
         queue [ #[$qmeta:meta] $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$($( #[$imeta:meta] )*
                       => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*
                      $bitem: $bmode [$( $bvar:$btyp ),*] {} ]
@@ -467,7 +467,7 @@ macro_rules! quick_error {
         buf [$( #[$bmeta:meta] )* => $bitem:ident: UNIT [ ] ]
         queue [($( $qvar:ident: $qtyp:ty ),+) $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])* => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*]
             buf [$( #[$bmeta] )* => $bitem: TUPLE [$( $qvar:$qtyp ),+] ]
             queue [$( $tail )*]
@@ -481,7 +481,7 @@ macro_rules! quick_error {
         buf [$( #[$bmeta:meta] )* => $bitem:ident: UNIT [ ] ]
         queue [{ $( $qvar:ident: $qtyp:ty ),+} $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])* => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*]
             buf [$( #[$bmeta] )* => $bitem: STRUCT [$( $qvar:$qtyp ),+] ]
             queue [$( $tail )*]);
@@ -494,7 +494,7 @@ macro_rules! quick_error {
         buf [$( #[$bmeta:meta] )* => $bitem:ident: UNIT [ ] ]
         queue [{$( $qvar:ident: $qtyp:ty ),+ ,} $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])* => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*]
             buf [$( #[$bmeta] )* => $bitem: STRUCT [$( $qvar:$qtyp ),+] ]
             queue [$( $tail )*]);
@@ -508,7 +508,7 @@ macro_rules! quick_error {
                  => $bitem:ident: $bmode:tt [$( $bvar:ident: $btyp:ty ),*] ]
         queue [ {$( $qfuncs:tt )*} $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])* => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*
                       $(#[$bmeta])* => $bitem: $bmode [$( $bvar:$btyp ),*] {$( $qfuncs )*} ]
             buf [ ]
@@ -523,7 +523,7 @@ macro_rules! quick_error {
                  => $bitem:ident: $bmode:tt [$( $bvar:ident: $btyp:ty ),*] ]
         queue [ $qitem:ident $( $tail:tt )*]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])* => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*
                      $(#[$bmeta])* => $bitem: $bmode [$( $bvar:$btyp ),*] {} ]
             buf [ => $qitem : UNIT [ ] ]
@@ -538,7 +538,7 @@ macro_rules! quick_error {
             => $bitem:ident: $bmode:tt [$( $bvar:ident: $btyp:ty ),*] ]
         queue [ ]
     ) => {
-        quick_error!(SORT [$( $def )*]
+        ai_quick_error!(SORT [$( $def )*]
             items [$( $(#[$imeta])* => $iitem: $imode [$( $ivar:$ityp ),*] {$( $ifuncs )*} )*
                      $(#[$bmeta])* => $bitem: $bmode [$( $bvar:$btyp ),*] {} ]
             buf [ ]
@@ -587,7 +587,7 @@ macro_rules! quick_error {
         queue [$( #[$qmeta:meta] )*
             => $qitem:ident: UNIT [ ] $( $queue:tt )*]
     ) => {
-        quick_error!(ENUM_DEFINITION [ $($def)* ]
+        ai_quick_error!(ENUM_DEFINITION [ $($def)* ]
             body [$($( #[$imeta] )* => $iitem ($(($( $ttyp ),+))*) {$({$( $svar: $styp ),*})*} )*
                     $( #[$qmeta] )* => $qitem () {} ]
             queue [ $($queue)* ]
@@ -600,7 +600,7 @@ macro_rules! quick_error {
         queue [$( #[$qmeta:meta] )*
             => $qitem:ident: TUPLE [$( $qvar:ident: $qtyp:ty ),+] $( $queue:tt )*]
     ) => {
-        quick_error!(ENUM_DEFINITION [ $($def)* ]
+        ai_quick_error!(ENUM_DEFINITION [ $($def)* ]
             body [$($( #[$imeta] )* => $iitem ($(($( $ttyp ),+))*) {$({$( $svar: $styp ),*})*} )*
                     $( #[$qmeta] )* => $qitem (($( $qtyp ),+)) {} ]
             queue [ $($queue)* ]
@@ -613,7 +613,7 @@ macro_rules! quick_error {
         queue [$( #[$qmeta:meta] )*
             => $qitem:ident: STRUCT [$( $qvar:ident: $qtyp:ty ),*] $( $queue:tt )*]
     ) => {
-        quick_error!(ENUM_DEFINITION [ $($def)* ]
+        ai_quick_error!(ENUM_DEFINITION [ $($def)* ]
             body [$($( #[$imeta] )* => $iitem ($(($( $ttyp ),+))*) {$({$( $svar: $styp ),*})*} )*
                     $( #[$qmeta] )* => $qitem () {{$( $qvar: $qtyp ),*}} ]
             queue [ $($queue)* ]
@@ -636,10 +636,10 @@ macro_rules! quick_error {
                 match *self {
                     $(
                         $(#[$imeta])*
-                        quick_error!(ITEM_PATTERN
+                        ai_quick_error!(ITEM_PATTERN
                             $name $item: $imode [$( ref $var ),*]
                         ) => {
-                            let display_fn = quick_error!(FIND_DISPLAY_IMPL
+                            let display_fn = ai_quick_error!(FIND_DISPLAY_IMPL
                                 $name $item: $imode
                                 {$( $funcs )*});
 
@@ -659,10 +659,10 @@ macro_rules! quick_error {
                 match *self {
                     $(
                         $(#[$imeta])*
-                        quick_error!(ITEM_PATTERN
+                        ai_quick_error!(ITEM_PATTERN
                             $name $item: $imode [$( ref $var ),*]
                         ) => {
-                            quick_error!(FIND_SOURCE_IMPL
+                            ai_quick_error!(FIND_SOURCE_IMPL
                                 $item: $imode [$( $var ),*]
                                 {$( $funcs )*})
                         }
@@ -671,12 +671,12 @@ macro_rules! quick_error {
             }
         }
         $(
-            quick_error!(FIND_FROM_IMPL
+            ai_quick_error!(FIND_FROM_IMPL
                 $name $item: $imode [$( $var:$typ ),*]
                 {$( $funcs )*});
         )*
         $(
-            quick_error!(FIND_CONTEXT_IMPL
+            ai_quick_error!(FIND_CONTEXT_IMPL
                 $name $item: $imode [$( $var:$typ ),*]
                 {$( $funcs )*});
         )*
@@ -684,7 +684,7 @@ macro_rules! quick_error {
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { display($self_:tt) -> ($( $exprs:tt )*) $( $tail:tt )*}
     ) => {
-        |quick_error!(IDENT $self_): &$name, f: &mut ::core::fmt::Formatter<'_>| { write!(f, $( $exprs )*) }
+        |ai_quick_error!(IDENT $self_): &$name, f: &mut ::core::fmt::Formatter<'_>| { write!(f, $( $exprs )*) }
     };
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { display($pattern:expr) $( $tail:tt )*}
@@ -699,7 +699,7 @@ macro_rules! quick_error {
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { $t:tt $( $tail:tt )*}
     ) => {
-        quick_error!(FIND_DISPLAY_IMPL
+        ai_quick_error!(FIND_DISPLAY_IMPL
             $name $item: $imode
             {$( $tail )*})
     };
@@ -720,7 +720,7 @@ macro_rules! quick_error {
         [$( $var:ident ),*]
         { $t:tt $( $tail:tt )*}
     ) => {
-        quick_error!(FIND_SOURCE_IMPL
+        ai_quick_error!(FIND_SOURCE_IMPL
             $item: $imode [$( $var ),*]
             { $($tail)* })
     };
@@ -742,7 +742,7 @@ macro_rules! quick_error {
                 }
             }
         )*
-        quick_error!(FIND_FROM_IMPL
+        ai_quick_error!(FIND_FROM_IMPL
             $name $item: $imode [$( $var:$typ ),*]
             {$( $tail )*});
     };
@@ -755,7 +755,7 @@ macro_rules! quick_error {
                 $name::$item
             }
         }
-        quick_error!(FIND_FROM_IMPL
+        ai_quick_error!(FIND_FROM_IMPL
             $name $item: UNIT [  ]
             {$( $tail )*});
     };
@@ -768,7 +768,7 @@ macro_rules! quick_error {
                 $name::$item($( $texpr ),*)
             }
         }
-        quick_error!(FIND_FROM_IMPL
+        ai_quick_error!(FIND_FROM_IMPL
             $name $item: TUPLE [$( $var:$typ ),*]
             { $($tail)* });
     };
@@ -783,7 +783,7 @@ macro_rules! quick_error {
                 }
             }
         }
-        quick_error!(FIND_FROM_IMPL
+        ai_quick_error!(FIND_FROM_IMPL
             $name $item: STRUCT [$( $var:$typ ),*]
             { $($tail)* });
     };
@@ -791,7 +791,7 @@ macro_rules! quick_error {
         [$( $var:ident: $typ:ty ),*]
         { $t:tt $( $tail:tt )*}
     ) => {
-        quick_error!(FIND_FROM_IMPL
+        ai_quick_error!(FIND_FROM_IMPL
             $name $item: $imode [$( $var:$typ ),*]
             {$( $tail )*}
         );
@@ -815,7 +815,7 @@ macro_rules! quick_error {
                 $name::$item($( $texpr ),*)
             }
         }
-        quick_error!(FIND_CONTEXT_IMPL
+        ai_quick_error!(FIND_CONTEXT_IMPL
             $name $item: TUPLE [$( $var:$typ ),*]
             { $($tail)* });
     };
@@ -832,7 +832,7 @@ macro_rules! quick_error {
                 $name::$item($( $texpr ),*)
             }
         }
-        quick_error!(FIND_CONTEXT_IMPL
+        ai_quick_error!(FIND_CONTEXT_IMPL
             $name $item: TUPLE [$( $var:$typ ),*]
             { $($tail)* });
     };
@@ -851,7 +851,7 @@ macro_rules! quick_error {
                 }
             }
         }
-        quick_error!(FIND_CONTEXT_IMPL
+        ai_quick_error!(FIND_CONTEXT_IMPL
             $name $item: STRUCT [$( $var:$typ ),*]
             { $($tail)* });
     };
@@ -870,7 +870,7 @@ macro_rules! quick_error {
                 }
             }
         }
-        quick_error!(FIND_CONTEXT_IMPL
+        ai_quick_error!(FIND_CONTEXT_IMPL
             $name $item: STRUCT [$( $var:$typ ),*]
             { $($tail)* });
     };
@@ -878,7 +878,7 @@ macro_rules! quick_error {
         [$( $var:ident: $typ:ty ),*]
         { $t:tt $( $tail:tt )*}
     ) => {
-        quick_error!(FIND_CONTEXT_IMPL
+        ai_quick_error!(FIND_CONTEXT_IMPL
             $name $item: $imode [$( $var:$typ ),*]
             {$( $tail )*}
         );
@@ -920,28 +920,28 @@ macro_rules! quick_error {
     // This is to contrast FIND_* clauses which just find stuff they need and
     // skip everything else completely
     (ERROR_CHECK $imode:tt display($self_:tt) -> ($( $exprs:tt )*) $( $tail:tt )*)
-    => { quick_error!(ERROR_CHECK $imode $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK $imode $($tail)*); };
     (ERROR_CHECK $imode:tt display($pattern: expr) $( $tail:tt )*)
-    => { quick_error!(ERROR_CHECK $imode $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK $imode $($tail)*); };
     (ERROR_CHECK $imode:tt display($pattern: expr, $( $exprs:tt )*) $( $tail:tt )*)
-    => { quick_error!(ERROR_CHECK $imode $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK $imode $($tail)*); };
     (ERROR_CHECK $imode:tt source($expr:expr) $($tail:tt)*)
-    => { quick_error!(ERROR_CHECK $imode $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK $imode $($tail)*); };
     (ERROR_CHECK $imode:tt from() $($tail:tt)*)
-    => { quick_error!(ERROR_CHECK $imode $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK $imode $($tail)*); };
     (ERROR_CHECK $imode:tt from($ftyp:ty) $($tail:tt)*)
-    => { quick_error!(ERROR_CHECK $imode $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK $imode $($tail)*); };
     (ERROR_CHECK TUPLE from($fvar:ident: $ftyp:ty) -> ($( $e:expr ),*) $( $tail:tt )*)
-    => { quick_error!(ERROR_CHECK TUPLE $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK TUPLE $($tail)*); };
     (ERROR_CHECK STRUCT from($fvar:ident: $ftyp:ty) -> {$( $v:ident: $e:expr ),*} $( $tail:tt )*)
-    => { quick_error!(ERROR_CHECK STRUCT $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK STRUCT $($tail)*); };
 
     (ERROR_CHECK TUPLE context($cvar:ident: $ctyp:ty, $fvar:ident: $ftyp:ty)
         -> ($( $e:expr ),*) $( $tail:tt )*)
-    => { quick_error!(ERROR_CHECK TUPLE $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK TUPLE $($tail)*); };
     (ERROR_CHECK STRUCT context($cvar:ident: $ctyp:ty, $fvar:ident: $ftyp:ty)
         -> {$( $v:ident: $e:expr ),*} $( $tail:tt )*)
-    => { quick_error!(ERROR_CHECK STRUCT $($tail)*); };
+    => { ai_quick_error!(ERROR_CHECK STRUCT $($tail)*); };
 
     (ERROR_CHECK $imode:tt ) => {};
     // Utility functions
@@ -981,7 +981,7 @@ mod test {
 
     use super::ResultExt;
 
-    quick_error! {
+    ai_quick_error! {
         #[derive(Debug)]
         pub enum Bare {
             One
@@ -1004,7 +1004,7 @@ mod test {
         assert!(err.source().is_none());
     }
 
-    quick_error! {
+    ai_quick_error! {
         #[derive(Debug)]
         pub enum Wrapper wraps Wrapped {
             One
@@ -1031,7 +1031,7 @@ mod test {
         );
     }
 
-    quick_error! {
+    ai_quick_error! {
         #[derive(Debug, PartialEq)]
         pub enum TupleWrapper {
             /// ParseFloat Error
@@ -1141,7 +1141,7 @@ mod test {
         assert!(err.source().is_none());
     }
 
-    quick_error! {
+    ai_quick_error! {
         #[derive(Debug, PartialEq)]
         pub enum StructWrapper {
             // Utf8 Error
@@ -1216,7 +1216,7 @@ mod test {
         assert!(err.source().is_none());
     }
 
-    quick_error! {
+    ai_quick_error! {
         #[derive(Debug)]
         pub enum ContextErr {
             Float(src: String, err: ParseFloatError) {
@@ -1291,7 +1291,7 @@ mod test {
 
     #[test]
     fn conditional_compilation() {
-        quick_error! {
+        ai_quick_error! {
             #[allow(dead_code)]
             #[derive(Debug)]
             pub enum Test {

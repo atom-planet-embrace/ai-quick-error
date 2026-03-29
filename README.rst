@@ -1,9 +1,12 @@
+This is a fork of the `quick-error <https://crates.io/crates/quick-error>`_ crate.
+The git repository is located at https://github.com/tailhook/quick-error/.
+
 ===========
 Quick Error
 ===========
 
 :Status: production-ready
-:Documentation: https://docs.rs/quick-error/
+:Documentation: https://docs.rs/ai-quick-error/
 
 A macro which makes error types pleasant to write.
 
@@ -19,7 +22,7 @@ Here is the comprehensive example:
 
 .. code-block:: rust
 
-    quick_error! {
+    ai_quick_error! {
         #[derive(Debug)]
         pub enum IoWrapper {
             Io(err: io::Error) {
