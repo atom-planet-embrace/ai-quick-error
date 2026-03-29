@@ -1,3 +1,4 @@
+#![cfg_attr(not(test), no_std)]
 #![warn(missing_docs, rust_2018_idioms)]
 //! A macro which makes errors easy to write
 //!
@@ -355,11 +356,11 @@ macro_rules! quick_error {
         $(#[$meta])*
         $($strdef)* $strname ( $internal );
 
-        impl ::std::fmt::Display for $strname {
-            fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>)
-                -> ::std::fmt::Result
+        impl ::core::fmt::Display for $strname {
+            fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>)
+                -> ::core::fmt::Result
             {
-                ::std::fmt::Display::fmt(&self.0, f)
+                ::core::fmt::Display::fmt(&self.0, f)
             }
         }
 
@@ -369,8 +370,8 @@ macro_rules! quick_error {
             }
         }
 
-        impl ::std::error::Error for $strname {
-            fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        impl ::core::error::Error for $strname {
+            fn source(&self) -> Option<&(dyn core::error::Error + 'static)> {
                 self.0.source()
             }
         }
@@ -628,9 +629,9 @@ macro_rules! quick_error {
         #[allow(renamed_and_removed_lints)]
         #[allow(unused_doc_comment)]
         #[allow(unused_doc_comments)]
-        impl ::std::fmt::Display for $name {
-            fn fmt(&self, fmt: &mut ::std::fmt::Formatter<'_>)
-                -> ::std::fmt::Result
+        impl ::core::fmt::Display for $name {
+            fn fmt(&self, fmt: &mut ::core::fmt::Formatter<'_>)
+                -> ::core::fmt::Result
             {
                 match *self {
                     $(
@@ -653,8 +654,8 @@ macro_rules! quick_error {
         #[allow(renamed_and_removed_lints)]
         #[allow(unused_doc_comment)]
         #[allow(unused_doc_comments)]
-        impl ::std::error::Error for $name {
-            fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        impl ::core::error::Error for $name {
+            fn source(&self) -> Option<&(dyn core::error::Error + 'static)> {
                 match *self {
                     $(
                         $(#[$imeta])*
@@ -683,17 +684,17 @@ macro_rules! quick_error {
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { display($self_:tt) -> ($( $exprs:tt )*) $( $tail:tt )*}
     ) => {
-        |quick_error!(IDENT $self_): &$name, f: &mut ::std::fmt::Formatter<'_>| { write!(f, $( $exprs )*) }
+        |quick_error!(IDENT $self_): &$name, f: &mut ::core::fmt::Formatter<'_>| { write!(f, $( $exprs )*) }
     };
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { display($pattern:expr) $( $tail:tt )*}
     ) => {
-        |_, f: &mut ::std::fmt::Formatter<'_>| { write!(f, $pattern) }
+        |_, f: &mut ::core::fmt::Formatter<'_>| { write!(f, $pattern) }
     };
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { display($pattern:expr, $( $exprs:tt )*) $( $tail:tt )*}
     ) => {
-        |_, f: &mut ::std::fmt::Formatter<'_>| { write!(f, $pattern, $( $exprs )*) }
+        |_, f: &mut ::core::fmt::Formatter<'_>| { write!(f, $pattern, $( $exprs )*) }
     };
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { $t:tt $( $tail:tt )*}
@@ -705,7 +706,7 @@ macro_rules! quick_error {
     (FIND_DISPLAY_IMPL $name:ident $item:ident: $imode:tt
         { }
     ) => {
-        |self_: &$name, f: &mut ::std::fmt::Formatter<'_>| {
+        |self_: &$name, f: &mut ::core::fmt::Formatter<'_>| {
             write!(f, "{:?}", self_)
         }
     };
